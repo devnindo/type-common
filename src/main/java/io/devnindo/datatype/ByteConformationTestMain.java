@@ -20,7 +20,7 @@ import io.devnindo.datatype.json.JsonObject;
 
 import java.nio.charset.StandardCharsets;
 
-public class TestMain {
+public class ByteConformationTestMain {
 
     public static void main(String... args) {
 

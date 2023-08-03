@@ -15,9 +15,6 @@
  */
 package io.devnindo.datatype.json;
 
-/**
- * @author prevy-sage
- */
 public interface Jsonable {
 
     JsonObject toJson();
