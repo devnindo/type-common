@@ -1,14 +1,17 @@
 plugins {
-    id "idea"
-    id "java-library"
-    id "maven-publish"
-    id "signing"
+    id 'idea'
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
-group = "io.devnindo.core"
-version = "0.9.8"
+group = 'io.devnindo.core'
+version = '0.9.8'
 sourceCompatibility = JavaVersion.VERSION_11
-compileJava.options.encoding = "UTF-8"
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
 
 repositories {
     mavenCentral()
@@ -20,45 +23,50 @@ publishing {
             from components.java
 
             pom {
-                name = "Devnindo Datatype"
-                description = "Datatype utils"
-                url = "https://github.com/devnindo/devnindo-datatype"
+                name = 'Devnindo Datatype'
+                description = 'Datatype utils'
+                url = 'https://github.com/devnindo/devnindo-datatype'
                 licenses {
                     license {
-                        name = "The Apache License, Version 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
                 developers {
                     developer {
-                        id = "rashed_muhammad"
-                        name = "Rashed Muhammad"
-                        email = "rashed091@gmail.com"
+                        id = 'rashed_muhammad'
+                        name = 'Rashed Muhammad'
+                        email = 'rashed091@gmail.com'
                     }
                     developer {
-                        id = "sasajib"
-                        name = "Shakil Ahmed"
-                        email = "sasajib@gmail.com"
+                        id = 'sasajib'
+                        name = 'Shakil Ahmed'
+                        email = 'sasajib@gmail.com'
                     }
                 }
                 scm {
-                    connection = "scm:git:git://github.com/devnindo/devnindo-datatype.git"
-                    developerConnection = "scm:git:ssh://github.com/devnindo/devnindo-datatype.git"
-                    url = "https://github.com/devnindo/devnindo-datatype/tree/main"
+                    connection = 'scm:git:git://github.com/devnindo/devnindo-datatype.git'
+                    developerConnection = 'scm:git:ssh://github.com/devnindo/devnindo-datatype.git'
+                    url = 'https://github.com/devnindo/devnindo-datatype/tree/main'
                 }
             }
         }
     }
     repositories {
         maven {
-            name = "OSSRH"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            name = 'OSSRH'
+            url = uri('https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/')
             credentials {
-                username ossrhUsername
-                password ossrhPassword
+                username = ossrhUsername
+                password = ossrhPassword
             }
         }
     }
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 signing {
@@ -66,16 +74,16 @@ signing {
 }
 
 dependencies {
-    implementation "com.fasterxml.jackson.core:jackson-core:2.13.4"
-    implementation "org.jooq:joor:0.9.14"
-    implementation "io.github.classgraph:classgraph:4.8.149"
-    testImplementation "org.junit.jupiter:junit-jupiter:5.9.0"
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.4'
+    implementation 'org.jooq:joor:0.9.14'
+    implementation 'io.github.classgraph:classgraph:4.8.149'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 }
 
 test {
     useJUnitPlatform()
     testLogging {
-        events "passed", "skipped", "failed"
-        showStandardStreams true
+        events = ['passed', 'skipped', 'failed']
+        showStandardStreams = true
     }
 }

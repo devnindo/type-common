@@ -45,14 +45,6 @@ public class JsonArray implements Json, Iterable<Object> {
 
     private List<Object> list;
 
-    /**
-     * Create an instance from a String of JSON, this string must be a valid array otherwise an exception will be thrown.
-     * <p/>
-     * If you are unsure of the value, you should use instead {@link Json#CODEC#fromString(String)} and check the result is
-     * a List.
-     *
-     * @param json the string of JSON
-     */
     public JsonArray(String json) {
         if (json == null) {
             throw new NullPointerException();

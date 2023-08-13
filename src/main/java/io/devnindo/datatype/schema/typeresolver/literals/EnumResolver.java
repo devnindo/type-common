@@ -20,9 +20,7 @@ import io.devnindo.datatype.util.Either;
 import io.devnindo.datatype.validation.Violation;
 import io.devnindo.datatype.validation.violations.TypeViolations;
 
-/**
- * implementation for Enum<?> field type json conversion
- */
+
 public class EnumResolver<T extends Enum<T>> implements SimpleTypeResolverIF<T> {
 
     public final Class<T> enumType;
