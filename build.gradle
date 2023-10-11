@@ -9,69 +9,8 @@ group = 'io.devnindo.core'
 version = '0.9.8'
 sourceCompatibility = JavaVersion.VERSION_11
 
-compileJava {
-    options.encoding = 'UTF-8'
-}
+apply from: 'publish.gradle'
 
-repositories {
-    mavenCentral()
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-
-            pom {
-                name = 'Devnindo Datatype'
-                description = 'Datatype utils'
-                url = 'https://github.com/devnindo/devnindo-datatype'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'rashed_muhammad'
-                        name = 'Rashed Muhammad'
-                        email = 'rashed091@gmail.com'
-                    }
-                    developer {
-                        id = 'sasajib'
-                        name = 'Shakil Ahmed'
-                        email = 'sasajib@gmail.com'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git://github.com/devnindo/devnindo-datatype.git'
-                    developerConnection = 'scm:git:ssh://github.com/devnindo/devnindo-datatype.git'
-                    url = 'https://github.com/devnindo/devnindo-datatype/tree/main'
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            name = 'OSSRH'
-            url = uri('https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/')
-            credentials {
-                username = ossrhUsername
-                password = ossrhPassword
-            }
-        }
-    }
-}
-
-java {
-    withJavadocJar()
-    withSourcesJar()
-}
-
-signing {
-    sign publishing.publications.mavenJava
-}
 
 dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-core:2.13.4'
@@ -86,4 +25,15 @@ test {
         events = ['passed', 'skipped', 'failed']
         showStandardStreams = true
     }
+}
+
+
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
