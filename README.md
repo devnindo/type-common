@@ -43,7 +43,7 @@ Upon setup, a Gradle task `generateSchema` will be available. Running `compileJa
 
 ## Data types
 In devnindo land, we use `DataBean` marker interface to indicate domain data objects. Following data types are supported:
-- plain data types: `Integer, Long, Float, Double, Boolean, Instant`
+- plain data types: `Integer, Long, String, Float, Double, Boolean, Instant`
 - Json presentational data types: `JsonObject` and `JsonArray`
 - Types that implements DataBean
 - List of all plain data types, `List<JsonObject>` and `List<DataBean>`
