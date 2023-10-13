@@ -189,7 +189,7 @@ JsonObject personJS = new JsonObject(jsonStr);
  
 Either<Violation, APerson> personEither = personJS.toBeanEither(APerson.class);
 
-// there is a violation
+// there is a violation because age field is marked as @Required
 Assertions.assertTrue(personEither.isLeft());
 System.out.println(personEither.left().toJson().encodePrettily());
 ```
