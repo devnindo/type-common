@@ -163,20 +163,28 @@ public class $APerson extends BeanSchema<APerson> {
 }
 ```
 
-Now for a  `JsonObject`, a simple conversion is as easy as follows:
+Now for a  json:
+
+```js
+
+{
+  "id" : "1234L",
+  "gender" : "male",
+  "address_list" : [ {
+    "city" : "Dhaka",
+    "road_list" : [ "Mirpur 10", "Gulshan" ]
+  }, {
+    "city" : "Barishal",
+    "road_list" : [ "Kachpur", "Badlapur" ]
+  } ]
+}
+``` 
+
+a simple conversion is as easy as follows:
 
 ```java
 
-JsonObject personJS = new JsonObject()
-                .put("id", "1234L")
-                .put("gender", "male")
-                .put("employer", JsonUtil.tickedJsonObj("{" +
-                        "`id` : `234L`," +
-                        "`age` : 54," +
-                        "`gender`: `female` " +
-                        "}"))
-                .put("address_list", addressArr())
-                ;
+JsonObject personJS = new JsonObject(jsonStr);
  
 Either<Violation, APerson> personEither = personJS.toBeanEither(APerson.class);
 
