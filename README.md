@@ -56,15 +56,16 @@ Lets consider following `DataBean` implementation:
 ```java
 
 public class APerson implements DataBean {
-    @Required
-    Long id;
 
-    @Required
-    Integer age;
+    @Required Long id;
+
+    @Required Integer age;
+
     Gender gender;
-    List<Address> addressList;
-    APerson employer;
 
+    List<Address> addressList;
+
+    APerson employer;
 
     public Long getId() {
         return id;
