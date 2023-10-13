@@ -7,7 +7,7 @@ A library for serialization and deserialization between POJOs and their JSON rep
 2. **Diffing and merging**: Helps Computing differences(delta) and merging of two bean instance
 3. **Validation**: Helps writing validators that can report structured constraint violation 
 
-As of now, a companion gradle plugin [devnindo-schemagen-plugin](https://github.com/devnindo/devnindo-schemagen-plugin) is needed to be used for compile time schema generation.  
+As of now, a companion gradle plugin [devnindo-schemagen](https://github.com/devnindo/devnindo-schemagen-plugin) plugin is needed to be used for compile time schema generation.  
 
 ## Motivation
 
