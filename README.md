@@ -41,7 +41,7 @@ plugins {
 
 Upon setup, a Gradle task `generateSchema` will be available. Running `compileJava` or `generateSchema` will create the schema representation for all `DataBean` implementations. 
 
-## Data types
+### Data types
 In devnindo land, we use `DataBean` marker interface to indicate domain data objects. Following data types are supported:
 - plain data types: `Integer, Long, String, Float, Double, Boolean, Instant`
 - Json presentational data types: `JsonObject` and `JsonArray`
