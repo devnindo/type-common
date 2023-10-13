@@ -59,6 +59,19 @@ public final class DataSample {
                 ;
     }
 
+    public static JsonObject personMissingAgeAndGender() {
+        return new JsonObject()
+                .put("id", "1234L")
+                .put("gender", "male")
+                /*.put("employer", JsonUtil.tickedJsonObj("{" +
+                        "`id` : `234L`," +
+                        "`age` : 54," +
+                        "`gender`: `female` " +
+                        "}"))*/
+                .put("address_list", addressArr())
+                ;
+    }
+
     public static JsonObject invalidPersonAgeType() {
         return new JsonObject()
                 .put("id", 1234)

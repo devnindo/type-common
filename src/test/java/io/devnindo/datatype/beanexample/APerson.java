@@ -2,14 +2,18 @@ package io.devnindo.datatype.beanexample;
 
 import io.devnindo.datatype.schema.AField;
 import io.devnindo.datatype.schema.DataBean;
+import io.devnindo.datatype.schema.Required;
 
 import java.util.List;
 
 public class APerson implements DataBean {
+    @Required
     Long id;
+
+    @Required
+    Integer age;
     Gender gender;
     List<Address> addressList;
-    Integer age;
     APerson employer;
 
 

@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.devnindo.datatype;
 
 import io.devnindo.datatype.json.JsonArray;
 import io.devnindo.datatype.json.JsonObject;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
 
 public class ByteConformationTestMain {
 
-    public static void main(String... args) {
+    @Test
+    public static void check_byte_conversion_utf8_set(String... args) {
 
 
         JsonObject js = new JsonObject();
@@ -36,12 +38,13 @@ public class ByteConformationTestMain {
         ;
 
         byte[] byteData = js.toByteData();
-        System.out.println(new String(byteData, StandardCharsets.UTF_8));
+       // System.out.println(new String(byteData, StandardCharsets.UTF_8));
+       // System.out.println("byteArrJs and stringArrJs equal: " + (arrJS.equals(new JsonArray("[100, 200, \"aa\"]".getBytes(StandardCharsets.UTF_8)))));
 
         JsonObject byteJS = new JsonObject(byteData);
 
-        System.out.println("byteJs and stringJs equal: " + (js.equals(byteJS)));
-        System.out.println("byteArrJs and stringArrJs equal: " + (arrJS.equals(new JsonArray("[100, 200, \"aa\"]".getBytes(StandardCharsets.UTF_8)))));
+        Assertions.assertEquals(true, js.equals(byteJS), "byteJs and stringJs equal: " );
+
 
     }
 }

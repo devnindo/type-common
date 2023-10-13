@@ -18,14 +18,44 @@ package io.devnindo.datatype.schema;
 import io.devnindo.datatype.json.Jsonable;
 import io.devnindo.datatype.json.JsonObject;
 
+import java.util.Objects;
+
+/**
+ *  A marker interface for generating schema of a Java Bean.
+ *  The schemagen plugin finds all implementations of DataBean
+ *  and generates Schema following class extension hierarchy.
+ * */
 public interface DataBean extends Jsonable {
+
 
     @Override
     public default JsonObject toJson() {
-        BeanSchema<DataBean> schema = BeanSchema.of((Class<DataBean>) this.getClass());
+        BeanSchema  schema = BeanSchema.of(this.getClass().getName());
         return schema.apply(this);
     }
 
+    /**
+     * helps diff-and-merge two DataBean of same type T
+     * @param from to put data from
+     * @param to to put data into
+     *
+     * This diff-merge algorithm works as follows:
+     * <ol>
+     *     <li>create a merge object of type T and empty JsonObject to hold diff</li>
+     *     <li>traverse field-by-field</li>
+     *     <li>
+     *           for a field f, if from.f not-null and from.f not-equals to.f
+     *             then merge.f = from.f, diff.put(F.name, )
+     *           else merge.f = to.f
+     *     </li>
+     * </ul>
+     * */
+    public static <T extends DataBean> DataDiff<T> diffMerge(T from,  T to)
+    {
+        Objects.requireNonNull(from);
+        BeanSchema<T> schema = BeanSchema.of(from.getClass().getName());
+        return schema.diff(from,  to);
+    }
 
 }
 

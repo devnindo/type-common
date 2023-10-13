@@ -20,7 +20,10 @@ import io.devnindo.datatype.validation.Violation;
 
 import java.util.function.Consumer;
 
-public interface TypeResolverIF<T> {
+/**
+ *
+ * */
+public interface TypeResolver<T> {
     public Either<Violation, T> evalJsonVal(Object val);
 
     public Object toJsonVal(T t);

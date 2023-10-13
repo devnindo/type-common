@@ -138,12 +138,13 @@ public class JsonObject implements
     }
 
     public <D extends DataBean> Either<Violation, D> toBeanEither(Class<D> beanType) {
-        return BeanSchema.of(beanType).apply(this);
+        BeanSchema<D> schema = BeanSchema.of(beanType.getName());
+        return schema.apply(this);
     }
 
     public <D extends DataBean> D toBean(Class<D> beanType) {
-
-        return BeanSchema.of(beanType).apply(this).right();
+        BeanSchema<D> schema = BeanSchema.of(beanType.getName());
+        return schema.apply(this).right();
     }
 
     /**

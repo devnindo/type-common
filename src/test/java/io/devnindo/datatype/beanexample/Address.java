@@ -5,7 +5,7 @@ import io.devnindo.datatype.schema.DataBean;
 
 import java.util.List;
 
-public class Address implements DataBean {
+public class Address implements DataBean  {
     String city;
 
     List<String> roadList;

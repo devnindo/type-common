@@ -29,13 +29,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class TypeResolverFactory {
-    private static final Map<String, TypeResolverIF> plainMap;
-    private static final Map<String, TypeResolverIF> plainListMap;
 
-    private static final Map<String, TypeResolverIF> enumMap;
-    private static final Map<String, TypeResolverIF> beanMap;
-    private static final Map<String, TypeResolverIF> beanListMap;
+public final class TypeResolverFactory {
+    private static final Map<String, TypeResolver> plainMap;
+    private static final Map<String, TypeResolver> plainListMap;
+
+    private static final Map<String, TypeResolver> enumMap;
+    private static final Map<String, TypeResolver> beanMap;
+    private static final Map<String, TypeResolver> beanListMap;
 
     static {
         plainMap = new HashMap<>();
@@ -49,7 +50,7 @@ public final class TypeResolverFactory {
         plainMap.put(String.class.getName(), new StringResolver());
         plainMap.put(Double.class.getName(), new DoubleResolver());
         plainMap.put(Boolean.class.getName(), new BooleanResolver());
-        plainMap.put(Instant.class.getName(), new InstantUTCResolver());
+        plainMap.put(Instant.class.getName(), new InstantResolver());
         plainMap.put(JsonObject.class.getName(), new JsonObjectResolver());
         plainMap.put(JsonArray.class.getName(), new JsonArrayResolver());
 
@@ -60,17 +61,17 @@ public final class TypeResolverFactory {
 
     }
 
-    public static final <T> TypeResolverIF<T> plain(Class<T> typeClz$) {
+    public static final <T> TypeResolver<T> plain(Class<T> typeClz$) {
         return plainMap.get(typeClz$.getName());
     }
 
 
-    public static final <T> TypeResolverIF<List<T>> plainDataList(Class<T> typeClz$) {
+    public static final <T> TypeResolver<List<T>> plainDataList(Class<T> typeClz$) {
         return plainListMap.get(typeClz$.getName());
     }
 
-    public static final <T extends Enum<T>> TypeResolverIF<T> enumType(Class<T> enumType$) {
-        TypeResolverIF<T> resolver = enumMap.get(enumType$.getName());
+    public static final <T extends Enum<T>> TypeResolver<T> enumType(Class<T> enumType$) {
+        TypeResolver<T> resolver = enumMap.get(enumType$.getName());
         if (resolver == null) {
             resolver = new EnumResolver<>(enumType$);
             enumMap.put(enumType$.getName(), resolver);
@@ -78,8 +79,8 @@ public final class TypeResolverFactory {
         return resolver;
     }
 
-    public static final <T extends DataBean> TypeResolverIF<T> beanType(Class<T> beanType) {
-        TypeResolverIF<T> resolver = beanMap.get(beanType.getName());
+    public static final <T extends DataBean> TypeResolver<T> beanType(Class<T> beanType) {
+        TypeResolver<T> resolver = beanMap.get(beanType.getName());
         if (resolver == null) {
             resolver = new BeanResolver<>(beanType);
             beanMap.put(beanType.getName(), resolver);
@@ -88,11 +89,11 @@ public final class TypeResolverFactory {
     }
 
 
-    public static final <T extends DataBean> TypeResolverIF<List<T>> beanList(Class<T> beanType) {
-        TypeResolverIF<List<T>> resolver = beanListMap.get(beanType.getName());
+    public static final <T extends DataBean> TypeResolver<List<T>> beanList(Class<T> beanType) {
+        TypeResolver<List<T>> resolver = beanListMap.get(beanType.getName());
         if (resolver == null) {
             resolver = new BeanListResolver<>(beanType);
-            beanMap.put(beanType.getName(), resolver);
+            beanListMap.put(beanType.getName(), resolver);
         }
         return resolver;
     }

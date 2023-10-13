@@ -25,7 +25,7 @@ import io.devnindo.datatype.validation.violations.TypeViolations;
 
 import java.util.function.Consumer;
 
-public class BeanResolver<D extends DataBean> implements TypeResolverIF<D> {
+public class BeanResolver<D extends DataBean> implements TypeResolver<D> {
     private final Class<D> beanType;
     private final Violation beanViolation;
 

@@ -16,15 +16,16 @@
 package io.devnindo.datatype.schema.typeresolver.jsons;
 
 import io.devnindo.datatype.json.JsonObject;
+import io.devnindo.datatype.schema.CommonDiff;
 import io.devnindo.datatype.schema.DataDiff;
-import io.devnindo.datatype.schema.typeresolver.TypeResolverIF;
+import io.devnindo.datatype.schema.typeresolver.TypeResolver;
 import io.devnindo.datatype.util.Either;
 import io.devnindo.datatype.validation.Violation;
 import io.devnindo.datatype.validation.violations.TypeViolations;
 
 import java.util.function.Consumer;
 
-public class JsonObjectResolver implements TypeResolverIF<JsonObject> {
+public class JsonObjectResolver implements TypeResolver<JsonObject> {
 
     @Override
     public Either<Violation, JsonObject> evalJsonVal(Object val) {
@@ -42,7 +43,7 @@ public class JsonObjectResolver implements TypeResolverIF<JsonObject> {
     @Override
     public JsonObject diff(JsonObject from, JsonObject to, Consumer changeConsumer) {
 
-        DataDiff<JsonObject> dataDiff = DataDiff.jsonObjDiff(from, to);
+        DataDiff<JsonObject> dataDiff = CommonDiff.jsonObjDiff(from, to);
 
         // this delta calculation will need to be changed
         if (dataDiff.delta == null || !dataDiff.delta.isEmpty()) {

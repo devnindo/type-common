@@ -15,13 +15,13 @@
  */
 package io.devnindo.datatype.schema.typeresolver.literals;
 
-import io.devnindo.datatype.schema.typeresolver.TypeResolverIF;
+import io.devnindo.datatype.schema.typeresolver.TypeResolver;
 import io.devnindo.datatype.util.Either;
 import io.devnindo.datatype.validation.Violation;
 
 import java.util.function.Consumer;
 
-public class IntegerHashResolver implements TypeResolverIF<Integer> {
+public class IntegerHashResolver implements TypeResolver<Integer> {
 
     @Override
     public Either<Violation, Integer> evalJsonVal(Object val) {

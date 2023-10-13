@@ -16,7 +16,7 @@
 package io.devnindo.datatype.schema;
 
 import io.devnindo.datatype.json.JsonObject;
-import io.devnindo.datatype.schema.typeresolver.TypeResolverIF;
+import io.devnindo.datatype.schema.typeresolver.TypeResolver;
 import io.devnindo.datatype.util.Either;
 import io.devnindo.datatype.validation.Violation;
 import io.devnindo.datatype.validation.violations.LogicalViolations;
@@ -28,10 +28,10 @@ import java.util.function.Function;
 public class SchemaField<D extends DataBean, VAL> {
     public final String name;
     public final Function<D, VAL> accessor;
-    public final TypeResolverIF<VAL> typeResolver;
+    public final TypeResolver<VAL> typeResolver;
     private final boolean required;
 
-    public SchemaField(String name, Function<D, VAL> accessor, TypeResolverIF<VAL> typeResolver, boolean required) {
+    public SchemaField(String name, Function<D, VAL> accessor, TypeResolver<VAL> typeResolver, boolean required) {
         this.name = name;
         this.accessor = accessor;
         this.typeResolver = typeResolver;

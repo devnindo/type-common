@@ -18,7 +18,7 @@ package io.devnindo.datatype.schema.typeresolver.lists;
 import io.devnindo.datatype.json.JsonArray;
 import io.devnindo.datatype.json.JsonObject;
 import io.devnindo.datatype.schema.DataBean;
-import io.devnindo.datatype.schema.typeresolver.TypeResolverIF;
+import io.devnindo.datatype.schema.typeresolver.TypeResolver;
 import io.devnindo.datatype.util.Either;
 import io.devnindo.datatype.validation.Violation;
 import io.devnindo.datatype.validation.violations.TypeViolations;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class BeanListResolver<T extends DataBean> implements TypeResolverIF<List<T>> {
+public class BeanListResolver<T extends DataBean> implements TypeResolver<List<T>> {
     private final Violation listJsonObjViolation;
     // Integer, String, Double, JsonObject
     Class<T> beanType;

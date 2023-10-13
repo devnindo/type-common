@@ -17,15 +17,12 @@ package io.devnindo.datatype.schema.typeresolver;
 
 import java.util.function.Consumer;
 
-public interface SimpleTypeResolverIF<T> extends TypeResolverIF<T> {
+public interface SimpleTypeResolverIF<T> extends TypeResolver<T> {
 
-    // SchemaField will do null-safety check before propagation
     @Override
     default Object toJsonVal(T t) {
         return t;
     }
-
-    ;
 
     @Override
     default T diff(T from, T to, Consumer changeConsumer) {
@@ -35,7 +32,5 @@ public interface SimpleTypeResolverIF<T> extends TypeResolverIF<T> {
         changeConsumer.accept(to);
         return from;
     }
-
-    ;
 }
 

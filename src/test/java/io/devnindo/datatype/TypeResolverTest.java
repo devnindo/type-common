@@ -5,7 +5,7 @@ import io.devnindo.datatype.beanexample.DataSample;
 import io.devnindo.datatype.json.JsonArray;
 import io.devnindo.datatype.json.JsonObject;
 import io.devnindo.datatype.schema.typeresolver.TypeResolverFactory;
-import io.devnindo.datatype.schema.typeresolver.TypeResolverIF;
+import io.devnindo.datatype.schema.typeresolver.TypeResolver;
 import io.devnindo.datatype.util.Either;
 import io.devnindo.datatype.validation.Violation;
 import org.junit.jupiter.api.Assertions;
@@ -17,8 +17,8 @@ public class TypeResolverTest {
 
     @Test
     void test_factory_registry_singleton() {
-        TypeResolverIF<List<Integer>> resolver1 = TypeResolverFactory.plainDataList(Integer.class);
-        TypeResolverIF<List<Integer>> resolver2 = TypeResolverFactory.plainDataList(Integer.class);
+        TypeResolver<List<Integer>> resolver1 = TypeResolverFactory.plainDataList(Integer.class);
+        TypeResolver<List<Integer>> resolver2 = TypeResolverFactory.plainDataList(Integer.class);
         Assertions.assertEquals(resolver1, resolver2);
 
     }
@@ -26,7 +26,7 @@ public class TypeResolverTest {
 
     @Test
     public void test_plain_list_resolve_success() {
-        TypeResolverIF<List<Integer>> resolver = TypeResolverFactory.plainDataList(Integer.class);
+        TypeResolver<List<Integer>> resolver = TypeResolverFactory.plainDataList(Integer.class);
         Either<Violation, List<Integer>> listIntEither = resolver.evalJsonVal(new JsonArray("[123, 234, 534]"));
 
         Assertions.assertEquals(Boolean.TRUE, listIntEither.isRight());
@@ -38,7 +38,7 @@ public class TypeResolverTest {
 
     @Test
     public void test_plain_list_resolve_fail() {
-        TypeResolverIF<List<Integer>> resolver = TypeResolverFactory.plainDataList(Integer.class);
+        TypeResolver<List<Integer>> resolver = TypeResolverFactory.plainDataList(Integer.class);
         Either<Violation, List<Integer>> listIntEither = resolver.evalJsonVal(new JsonArray("[123, 234, \"534\"]"));
         Assertions.assertEquals(Boolean.TRUE, listIntEither.isLeft());
         System.out.println(listIntEither.left().constraint);
@@ -49,14 +49,14 @@ public class TypeResolverTest {
 
     @Test
     public void test_json_object_list_resolve_success() {
-        TypeResolverIF<List<JsonObject>> resolver = TypeResolverFactory.plainDataList(JsonObject.class);
+        TypeResolver<List<JsonObject>> resolver = TypeResolverFactory.plainDataList(JsonObject.class);
         Either<Violation, List<JsonObject>> listJsEither = resolver.evalJsonVal(DataSample.addressArr());
         Assertions.assertEquals(Boolean.TRUE, listJsEither.isRight());
     }
 
     @Test
     public void test_bean_list_resolve_success() {
-        TypeResolverIF<List<Address>> resolver = TypeResolverFactory.beanList(Address.class);
+        TypeResolver<List<Address>> resolver = TypeResolverFactory.beanList(Address.class);
         Either<Violation, List<Address>> listJsEither = resolver.evalJsonVal(DataSample.addressArr());
         Assertions.assertEquals(Boolean.TRUE, listJsEither.isRight());
 
@@ -67,7 +67,7 @@ public class TypeResolverTest {
 
     @Test
     public void test_bean_list_resolve_fail() {
-        TypeResolverIF<List<Address>> resolver = TypeResolverFactory.beanList(Address.class);
+        TypeResolver<List<Address>> resolver = TypeResolverFactory.beanList(Address.class);
         Either<Violation, List<Address>> listJsEither = resolver.evalJsonVal(DataSample.invalidAddressArr());
         Assertions.assertEquals(Boolean.TRUE, listJsEither.isLeft());
         System.out.println(listJsEither.left().toJson().encodePrettily());
