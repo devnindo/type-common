@@ -190,8 +190,22 @@ Either<Violation, APerson> personEither = personJS.toBeanEither(APerson.class);
 
 // there is a violation
 Assertions.assertTrue(personEither.isLeft());
-
+System.out.println(personEither.left().toJson().encodePrettily());
 ```
 
+The above `println` will print following structure to report the violation:
 
+```js
+{
+  "constraint" : "SCHEMA::APerson",
+  "ctx" : {
+    "age" : {
+      "constraint" : "NOT_NULL",
+      "ctx" : null
+    }
+  }
+}
+``` 
+
+Kindly see more examples in the library's `src/test`. More comprehensive test cases are coming soon. 
   
