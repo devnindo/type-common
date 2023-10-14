@@ -11,7 +11,7 @@ As of now, a companion gradle plugin [devnindo-schemagen](https://github.com/dev
 
 ## Motivation
 
-From our perspective, using annotations as marker is good but to define domain behaviour is a bad practice. For example Google's [dagger](https://github.com/google/dagger) dependancy injection library uses annotation as a marker to define dependancy graph, generates source code during compile time for all the module and components involved.  
+From our perspective, using annotations as marker is good but to define domain behaviour is a bad practice. For example Google's [dagger](https://github.com/google/dagger) dependency injection library uses annotation as a marker to define dependency graph, generates source code during compile time for all the module and components involved.  
 
 Almost all JPA based web framework use annotation to desicribe constraints on fields of Java POJO. This makes data validation and conversion very limiting, reflection dependant, too much verbose and hard to generate a well structure context. 
 
