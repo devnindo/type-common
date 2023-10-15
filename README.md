@@ -1,5 +1,5 @@
 # devnindo-datatype
-A library for serialization and deserialization between POJOs and their JSON representation ***without reflection***.
+A library for serialization and deserialization between Java Beans and their JSON representation ***without reflection***.
 
 ## Features
 
