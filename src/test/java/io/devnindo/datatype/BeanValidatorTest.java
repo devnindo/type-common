@@ -12,6 +12,8 @@ import io.devnindo.datatype.validation.Violation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.Period;
+
 import static io.devnindo.datatype.validation.validators.ValueRules.*;
 
 public class BeanValidatorTest {
@@ -32,13 +34,15 @@ public class BeanValidatorTest {
     public void bean_validation_success() {
         JsonObject personJS = DataSample.person();
         APerson person = personJS.toBean(APerson.class);
-        Either<Violation, APerson> personEither = BeanValidator.create("FEMALE_PENSION_ELIGIBLE", APerson.class, $ -> {
+
+        BeanValidator<APerson> pensionEligibility = BeanValidator.create("FEMALE_PENSION_ELIGIBLE", APerson.class, $ -> {
             $.required($APerson.AGE).and(gtThan(50));
             $.required($APerson.GENDER).and(equal(Gender.female));
-        }).apply(person);
+        });
 
+        Either<Violation, APerson> personEither = pensionEligibility.apply(person);
 
         Assertions.assertEquals(true, personEither.isLeft(), "Validation should fail for: "+personJS.encode());
-        System.out.println(personEither.left().toJson().encodePrettily());
+        //System.out.println(personEither.left().toJson().encodePrettily());
     }
 }

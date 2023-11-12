@@ -49,7 +49,7 @@ public final class DataSample {
         return new JsonObject()
                 .put("id", "1234L")
                 .put("age", 48)
-                .put("gender", "male")
+                .put("gender", "female")
                 .put("employer", JsonUtil.tickedJsonObj("{" +
                         "`id` : `234L`," +
                         "`age` : 54," +

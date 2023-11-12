@@ -54,6 +54,19 @@ In devnindo land, we use `DataBean` marker interface to indicate domain data obj
 Lets consider following `DataBean` implementation:
 
 ```java
+public class Address implements DataBean  {
+    String city;
+
+    List<String> roadList;
+
+    public String getCity() {
+        return city;
+    }
+
+    public List<String> getRoadList() {
+        return roadList;
+    }
+}
 
 public class APerson implements DataBean {
 
@@ -98,7 +111,6 @@ public class APerson implements DataBean {
 Running `compileJava` should generate following schema `$APerson`
 
 ```java
-
 public class $APerson extends BeanSchema<APerson> {
     public static final SchemaField<APerson, Gender> GENDER = enumField("gender", APerson::getGender, Gender.class, false);
 
@@ -208,5 +220,24 @@ The above `println` will print following structure to report the violation:
 }
 ``` 
 
-Kindly see more examples in the library's `src/test`. More comprehensive test cases are coming soon. 
+The library helps defining functional validation too:
+
+```java
+@Test
+public void bean_validation_success() {
+        JsonObject personJS = DataSample.person();
+        APerson person = personJS.toBean(APerson.class);
+
+        BeanValidator<APerson> pensionEligibility = BeanValidator.create("FEMALE_PENSION_ELIGIBLE", APerson.class, $ -> {
+        $.required($APerson.AGE).and(gtThan(50));
+        $.required($APerson.GENDER).and(equal(Gender.female));
+        });
+
+        Either<Violation, APerson> personEither = pensionEligibility.apply(person);
+
+        Assertions.assertEquals(true, personEither.isLeft(), "Validation should fail for: "+personJS.encode());
+}
+```
+
+Kindly see more examples in the library's `src/test`.  
   
