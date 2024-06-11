@@ -48,7 +48,7 @@ public interface DataBean extends Jsonable {
      *             then merge.f = from.f, diff.put(F.name, )
      *           else merge.f = to.f
      *     </li>
-     * </ul>
+     * </ol>
      * */
     public static <T extends DataBean> DataDiff<T> diffMerge(T from,  T to)
     {

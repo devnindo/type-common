@@ -1,12 +1,38 @@
 
+
+def privateMaven = {
+     name = 'private'
+    url = prvRepoURL
+    credentials {
+        username  prvUserName
+        password  prvPassword
+    }
+
+}
+
 repositories {
     mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+    maven privateMaven
 }
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        "${project.name}"(MavenPublication) {
             from components.java
+
+            repositories {
+                maven {
+                    name = 'public'
+                    url = uri('https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/')
+                    credentials {
+                        username = ossrhUsername
+                        password = ossrhPassword
+                    }
+                }
+
+                maven  privateMaven
+            }
 
             pom {
                 name = 'Devnindo Datatype'
@@ -38,18 +64,11 @@ publishing {
             }
         }
     }
-    repositories {
-        maven {
-            name = 'OSSRH'
-            url = uri('https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/')
-            credentials {
-                username = ossrhUsername
-                password = ossrhPassword
-            }
-        }
-    }
+
 }
 
+/*
 signing {
-    sign publishing.publications.mavenJava
-}
+
+    sign project.name//publishing.publications."-project-"
+}*/
