@@ -1,7 +1,6 @@
 
-
-def privateMaven = {
-     name = 'private'
+def PrivateRepo = {
+    name = 'private'
     url = prvRepoURL
     credentials {
         username  prvUserName
@@ -10,10 +9,19 @@ def privateMaven = {
 
 }
 
+def OssRepo = {
+    name = 'oss'
+    url = ossRepoURL
+    credentials {
+        username = ossrhUsername
+        password = ossrhPassword
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url "https://plugins.gradle.org/m2/" }
-    maven privateMaven
+    maven PrivateRepo
 }
 
 publishing {
@@ -22,16 +30,8 @@ publishing {
             from components.java
 
             repositories {
-                maven {
-                    name = 'public'
-                    url = uri('https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/')
-                    credentials {
-                        username = ossrhUsername
-                        password = ossrhPassword
-                    }
-                }
-
-                maven  privateMaven
+                maven  OssRepo
+                maven  PrivateRepo
             }
 
             pom {
@@ -67,8 +67,8 @@ publishing {
 
 }
 
-/*
+
 signing {
 
     sign project.name//publishing.publications."-project-"
-}*/
+}
